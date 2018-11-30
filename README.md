@@ -1,0 +1,1 @@
+# idea-protostuf-generate-tool
