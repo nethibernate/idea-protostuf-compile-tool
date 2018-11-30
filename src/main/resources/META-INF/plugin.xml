@@ -1,0 +1,29 @@
+<idea-plugin>
+    <id>com.nethibernate.idea-protostuff-compile-tool</id>
+    <name>Protostuff Compiler</name>
+    <vendor email="nethibernate@gmail.com">nethibernate</vendor>
+
+    <description><![CDATA[
+    This is a plugin to help you invoke protostuff compiler to compile proto files.<br>
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <applicationConfigurable instance="com.nethibernate.idea.pgt.config.EgtConfiguration"/>
+        <applicationService serviceImplementation="com.nethibernate.idea.pgt.service.ConfigurationPersistentService"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <action class="com.nethibernate.idea.pgt.action.ProtostuffCompileAction" id="ed" text="Protostuff Compile"
+                description="try it!">
+            <add-to-group group-id="ProjectViewPopupMenu"/>
+        </action>
+    </actions>
+</idea-plugin>
