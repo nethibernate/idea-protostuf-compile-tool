@@ -15,7 +15,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
-        <applicationConfigurable instance="com.nethibernate.idea.pgt.config.EgtConfiguration"/>
+        <applicationConfigurable instance="com.nethibernate.idea.pgt.config.PgtConfiguration"/>
         <applicationService serviceImplementation="com.nethibernate.idea.pgt.service.ConfigurationPersistentService"/>
     </extensions>
 

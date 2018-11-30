@@ -12,7 +12,7 @@ import javax.swing.*;
 /**
  * @author nethibernate
  */
-public class EgtConfiguration implements Configurable {
+public class PgtConfiguration implements Configurable {
 	
 	private ConfigForm configForm;
 	
@@ -22,7 +22,7 @@ public class EgtConfiguration implements Configurable {
 	@Nls(capitalization = Nls.Capitalization.Title)
 	@Override
 	public String getDisplayName() {
-		return "External Generate Tool";
+		return "Protostuff Compile Tool";
 	}
 	
 	@Nullable
