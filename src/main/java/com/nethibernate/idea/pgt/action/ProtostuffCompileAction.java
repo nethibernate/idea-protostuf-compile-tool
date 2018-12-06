@@ -24,7 +24,8 @@ public class ProtostuffCompileAction extends AnAction {
 	@Override
 	public void actionPerformed(AnActionEvent e) {
 		
-		if (ConfigurationPersistentService.getInstance().getConfig().getExternalToolPath().isEmpty()) {
+		String externalToolPath = ConfigurationPersistentService.getInstance().getConfig().getExternalToolPath();
+		if (externalToolPath == null || externalToolPath.isEmpty()) {
 			Messages.showErrorDialog("You must set your protostuff compiler!", "Oops!");
 			return;
 		}
@@ -48,7 +49,7 @@ public class ProtostuffCompileAction extends AnAction {
 		
 		StringBuilder commandSb = new StringBuilder();
 		commandSb.append("java -jar ")
-				.append(ConfigurationPersistentService.getInstance().getConfig().getExternalToolPath())
+				.append(externalToolPath)
 				.append(" -g java -o ")
 				.append(outputPath)
 				.append(" -I ")
@@ -79,6 +80,7 @@ public class ProtostuffCompileAction extends AnAction {
 				if (!handleDir(child, commandPrefix, project)) {
 					return false;
 				}
+				continue;
 			}
 			
 			if (!child.getExtension().equals("proto")) continue;
