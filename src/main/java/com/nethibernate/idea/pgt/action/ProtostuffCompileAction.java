@@ -10,7 +10,10 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.nethibernate.idea.pgt.service.ConfigurationPersistentService;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 
 /**
  * @author nethibernate
@@ -46,6 +49,27 @@ public class ProtostuffCompileAction extends AnAction {
 		//Get module dir path
 		String moduleDirPath = ModuleUtil.getModuleDirPath(module);
 		String outputPath = moduleDirPath + "/" + ConfigurationPersistentService.getInstance().getConfig().getOutputPath();
+		
+		//first delete output path
+		Path directory = Paths.get(outputPath);
+		try {
+			Files.walkFileTree(directory, new SimpleFileVisitor<Path>() {
+				@Override
+				public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+					Files.delete(file);
+					return FileVisitResult.CONTINUE;
+				}
+				
+				@Override
+				public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+					Files.delete(dir);
+					return FileVisitResult.CONTINUE;
+				}
+			});
+		} catch (IOException e1) {
+			Messages.showErrorDialog(project, "Old generated files cannot be deleted", "Failed");
+			return;
+		}
 		
 		StringBuilder commandSb = new StringBuilder();
 		commandSb.append("java -jar ")
