@@ -1,9 +1,7 @@
 package com.nethibernate.idea.pgt.bean;
 
 /**
- * @note:
- * @author: fine
- * @date: 2018/10/6 4:59 PM
+ * @author nethibernate
  */
 public class Config {
 	

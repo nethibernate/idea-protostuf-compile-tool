@@ -5,15 +5,14 @@ import com.nethibernate.idea.pgt.service.ConfigurationPersistentService;
 import javax.swing.*;
 
 /**
- * @author: nethibernate
+ * @author nethibernate
  */
-@SuppressWarnings("unchecked")
 public class ConfigForm {
     private JPanel root;
     private JTextField externalToolPathTextField;
     private JTextField outputPathTextField;
     
-    private ConfigurationPersistentService persistent = ConfigurationPersistentService.getInstance();
+    private final ConfigurationPersistentService persistent = ConfigurationPersistentService.getInstance();
 
     public JComponent getRootPanel() {
         externalToolPathTextField.setText(persistent.getConfig().getExternalToolPath());

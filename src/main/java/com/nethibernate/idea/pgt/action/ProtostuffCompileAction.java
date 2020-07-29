@@ -9,8 +9,8 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.nethibernate.idea.pgt.service.ConfigurationPersistentService;
+import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -25,7 +25,7 @@ public class ProtostuffCompileAction extends AnAction {
 	}
 	
 	@Override
-	public void actionPerformed(AnActionEvent e) {
+	public void actionPerformed(@NotNull AnActionEvent e) {
 		
 		String externalToolPath = ConfigurationPersistentService.getInstance().getConfig().getExternalToolPath();
 		if (externalToolPath == null || externalToolPath.isEmpty()) {
@@ -85,8 +85,8 @@ public class ProtostuffCompileAction extends AnAction {
 		} else {
 			Messages.showErrorDialog(project, "Not all proto files have been compiled!", "Failed");
 		}
-		//refresh whole project
-		project.getBaseDir().refresh(false, true);
+		//refresh module
+		module.getModuleFile().getParent().refresh(false, true);
 	}
 	
 	@Override
@@ -116,11 +116,7 @@ public class ProtostuffCompileAction extends AnAction {
 					Messages.showErrorDialog(project, "File " + child.getName() + " compile failed!", "Compile Failed");
 					return false;
 				}
-			} catch (IOException e1) {
-				e1.printStackTrace();
-				Messages.showErrorDialog(e1.getMessage() + " " + child.getName(), "Exception");
-				return false;
-			} catch (InterruptedException e1) {
+			} catch (IOException | InterruptedException e1) {
 				e1.printStackTrace();
 				Messages.showErrorDialog(e1.getMessage() + " " + child.getName(), "Exception");
 				return false;

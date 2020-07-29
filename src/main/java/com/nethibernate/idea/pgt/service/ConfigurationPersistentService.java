@@ -10,12 +10,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * @author: nethibernate
+ * @author nethibernate
  */
-@State(name = "EgtConfig", storages = {@Storage(file = "$APP_CONFIG$/Egt.xml")})
+@State(name = "EgtConfig", storages = {@Storage(value = "$APP_CONFIG$/Egt.xml")})
 public class ConfigurationPersistentService implements PersistentStateComponent<Config> {
 
-    private Config config = new Config();
+    private final Config config = new Config();
 
     public static ConfigurationPersistentService getInstance() {
         return ServiceManager.getService(ConfigurationPersistentService.class);
